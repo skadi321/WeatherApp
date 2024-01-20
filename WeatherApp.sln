@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp", "WeatherApp.csproj", "{70D3D8B0-8364-4E00-9022-B877A962CE36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KafkaProducer", "..\KafkaProducer\KafkaProducer.csproj", "{B4D3FB40-4BEF-4703-AE57-B78174F77907}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{70D3D8B0-8364-4E00-9022-B877A962CE36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D3D8B0-8364-4E00-9022-B877A962CE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D3D8B0-8364-4E00-9022-B877A962CE36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4D3FB40-4BEF-4703-AE57-B78174F77907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4D3FB40-4BEF-4703-AE57-B78174F77907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4D3FB40-4BEF-4703-AE57-B78174F77907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4D3FB40-4BEF-4703-AE57-B78174F77907}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

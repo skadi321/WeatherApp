@@ -19,7 +19,7 @@ namespace WeatherApp
                 string ksqlServerUrl = "http://localhost:8088/query";
 
                 // Set the ksql query and headers
-                string ksqlQuery = "{\"ksql\":\"SELECT * FROM temperature EMIT CHANGES LIMIT 1;\",\"streamsProperties\":{}}";
+                string ksqlQuery = "{\"ksql\":\"SELECT * FROM temperature EMIT CHANGES LIMIT 2;\",\"streamsProperties\":{}}";
                 var content = new StringContent(ksqlQuery, Encoding.UTF8, "application/vnd.ksql.v1+json");
 
                 // Create an instance of HttpClient
@@ -41,7 +41,7 @@ namespace WeatherApp
                             JArray jsonArray = JArray.Parse(result);
 
                             // Extract the value to be displayed in the TextBlock
-                        
+                            
                             Console.WriteLine(jsonArray[1]["row"]["columns"].ToString());
                             // Return the value
                             return jsonArray;

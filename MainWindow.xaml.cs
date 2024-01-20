@@ -25,47 +25,50 @@ namespace WeatherApp
         public MainWindow()
         {
             InitializeComponent();
-            Task.Run(async () => 
-            { 
-                while (true)
-                {
-                    Thread.Sleep(2000);
-                    await KafkaProducer.SendTemperatureMessageAsync();
-                    
-                }
-                 }
-            );
+            
         }
 
         private async void  TextBlockVarazdin_Loaded(object sender, RoutedEventArgs e)
         {
             TextBlockVarazdinTemperature.Text = "Loading";
-            await Task.Run(async () =>
+
+            while (true)
             {
-                while (true)
+                JArray result = await KafkaReceiver.RecieveTemperatureMessageAsync();
+                Dispatcher.Invoke(() =>
                 {
-                    JArray result = await KafkaReceiver.RecieveTemperatureMessageAsync();
-                    Dispatcher.Invoke(() =>
+                    for (int i = 1; i < 3; i++)
                     {
-                        switch (result[1]["row"]["columns"][0].ToString())
+
+
+                        switch (result[i]["row"]["columns"][0].ToString())
                         {
                             case "Varazdin":
-                                TextBlockVarazdinTemperature.Text = result[1]["row"]["columns"][1].ToString();
+                                TextBlockVarazdinTemperature.Text = result[i]["row"]["columns"][1].ToString();
                                 break;
                             case "Zagreb":
-                                TextBlockZagrebTemperature.Text = result[1]["row"]["columns"][1].ToString();
+                                TextBlockZagrebTemperature.Text = result[i]["row"]["columns"][1].ToString();
                                 break;
                             case "Split":
-                                TextBlockSplitTemperature.Text = result[1]["row"]["columns"][1].ToString();
+                                TextBlockSplitTemperature.Text = result[i]["row"]["columns"][1].ToString();
                                 break;
                             case "Rijeka":
-                                TextBlockRijekaTemperature.Text = result[1]["row"]["columns"][1].ToString();
+                                TextBlockRijekaTemperature.Text = result[i]["row"]["columns"][1].ToString();
+                                break;
+                            default:
                                 break;
                         }
-                       });
-                }
+                    }
 
-            });
+                });
+            }
+
+            
+            
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             
         }
     }
