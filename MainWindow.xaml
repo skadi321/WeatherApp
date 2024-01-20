@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WeatherApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        WindowState="Maximized">
+        WindowState="Maximized" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -22,6 +22,14 @@
             <RowDefinition Height="1*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Name="TextBlockVarazdin" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center" Loaded="TextBlockVarazdin_Loaded"/>
+        <TextBlock Name="TextBlockVarazdinTemperature" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center" Loaded="TextBlockVarazdin_Loaded"/>
+        <TextBlock Name="TextBlockZagrebTemperature" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockSplitTemperature" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockRijekaTemperature" Grid.Column="4" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center"/>
+        <Label Content="Temperature" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+        <Label Content="Varaždin" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+        <Label Content="Zagreb" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" />
+        <Label Content="Split" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" />
+        <Label Content="Rijeka" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" />
     </Grid>
 </Window>

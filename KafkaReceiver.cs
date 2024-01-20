@@ -10,13 +10,12 @@ using System.Windows.Controls;
 
 namespace WeatherApp
 {
-    internal static class KafkaReciever
+    internal static class KafkaReceiver
     {
-            
-        internal static async Task RecieveMessageAsync(TextBlock textBlock)
+
+        internal static async Task<JArray> RecieveTemperatureMessageAsync()
         {
-            while (true)
-            {
+            
                 string ksqlServerUrl = "http://localhost:8088/query";
 
                 // Set the ksql query and headers
@@ -28,21 +27,24 @@ namespace WeatherApp
                 {
                     string result = "";
                     try
-                    {
+                    {   
                         // Make a POST request
                         HttpResponseMessage response = await httpClient.PostAsync(ksqlServerUrl, content);
+
 
                         // Check if the request was successful
                         if (response.IsSuccessStatusCode)
                         {
                             // Read the content as a string
-
                             result = await response.Content.ReadAsStringAsync();
                             result = result.Replace("\n", "");
                             JArray jsonArray = JArray.Parse(result);
-                            textBlock.Text = jsonArray[1]["row"]["columns"][1].ToString();
 
-
+                            // Extract the value to be displayed in the TextBlock
+                        
+                            Console.WriteLine(jsonArray[1]["row"]["columns"].ToString());
+                            // Return the value
+                            return jsonArray;
                         }
                         else
                         {
@@ -54,9 +56,11 @@ namespace WeatherApp
                     {
                         Console.WriteLine($"An error occurred: {ex.Message}");
                     }
-
                 }
-            }
+            return JArray.Parse("{\"Error\":\"There has been an error\"}");
+
+
         }
+
     }
 }
