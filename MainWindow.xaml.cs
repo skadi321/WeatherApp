@@ -30,38 +30,47 @@ namespace WeatherApp
 
         private async void  TextBlockVarazdin_Loaded(object sender, RoutedEventArgs e)
         {
-            TextBlockVarazdinTemperature.Text = "Loading";
+           
 
-            while (true)
+            await Task.Run(async () =>
             {
-                JArray result = await KafkaReceiver.RecieveTemperatureMessageAsync();
-                Dispatcher.Invoke(() =>
+
+                while (true)
                 {
-                    for (int i = 1; i < 3; i++)
+                    JArray result = await KafkaConsumer.RecieveTemperatureMessageAsync();
+                    Dispatcher.Invoke(() =>
                     {
-
-
-                        switch (result[i]["row"]["columns"][0].ToString())
+                        for (int i = 1; i < 3; i++)
                         {
-                            case "Varazdin":
-                                TextBlockVarazdinTemperature.Text = result[i]["row"]["columns"][1].ToString();
-                                break;
-                            case "Zagreb":
-                                TextBlockZagrebTemperature.Text = result[i]["row"]["columns"][1].ToString();
-                                break;
-                            case "Split":
-                                TextBlockSplitTemperature.Text = result[i]["row"]["columns"][1].ToString();
-                                break;
-                            case "Rijeka":
-                                TextBlockRijekaTemperature.Text = result[i]["row"]["columns"][1].ToString();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
 
-                });
-            }
+
+                            switch (result[i]["row"]["columns"][0].ToString())
+                            {
+                                case "Varazdin":
+                                    
+                                    TextBlockVarazdinTemperature.Text = result[i]["row"]["columns"][3].ToString();
+                                    TextBlockVarazdinRain.Text = result[i]["row"]["columns"][1].ToString();
+                                    break;
+                                case "Zagreb":
+                                    TextBlockZagrebTemperature.Text = result[i]["row"]["columns"][3].ToString();
+                                    TextBlockZagrebRain.Text = result[i]["row"]["columns"][1].ToString();
+                                    break;
+                                case "Split":
+                                    TextBlockSplitTemperature.Text = result[i]["row"]["columns"][3].ToString();
+                                    TextBlockSplitRain.Text = result[i]["row"]["columns"][1].ToString();
+                                    break;
+                                case "Rijeka":
+                                    TextBlockRijekaTemperature.Text = result[i]["row"]["columns"][3].ToString();
+                                    TextBlockRijekaRain.Text = result[i]["row"]["columns"][1].ToString();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                    });
+                };
+            });
 
             
             
@@ -69,6 +78,12 @@ namespace WeatherApp
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
+        }
+
+        private async  void TextBlockVarazdinTemperatureRain_Loaded(object sender, RoutedEventArgs e)
+        {
+            
             
         }
     }

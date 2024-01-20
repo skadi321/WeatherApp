@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace WeatherApp
 {
-    internal static class KafkaReceiver
+    internal static class KafkaConsumer
     {
 
         internal static async Task<JArray> RecieveTemperatureMessageAsync()
@@ -19,7 +19,7 @@ namespace WeatherApp
                 string ksqlServerUrl = "http://localhost:8088/query";
 
                 // Set the ksql query and headers
-                string ksqlQuery = "{\"ksql\":\"SELECT * FROM temperature EMIT CHANGES LIMIT 2;\",\"streamsProperties\":{}}";
+                string ksqlQuery = "{\"ksql\":\"SELECT * FROM joined EMIT CHANGES LIMIT 2;\",\"streamsProperties\":{}}";
                 var content = new StringContent(ksqlQuery, Encoding.UTF8, "application/vnd.ksql.v1+json");
 
                 // Create an instance of HttpClient
@@ -61,6 +61,52 @@ namespace WeatherApp
 
 
         }
+        internal static async Task<JArray> RecieveRainMessageAsync()
+        {
 
+            string ksqlServerUrl = "http://localhost:8088/query";
+
+            // Set the ksql query and headers
+            string ksqlQuery = "{\"ksql\":\"SELECT * FROM rain JOIN temperaure ON rain.town = temperature.town EMIT CHANGES  LIMIT 2;\",\"streamsProperties\":{}}";
+            var content = new StringContent(ksqlQuery, Encoding.UTF8, "application/vnd.ksql.v1+json");
+
+            // Create an instance of HttpClient
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string result = "";
+                try
+                {
+                    // Make a POST request
+                    HttpResponseMessage response = await httpClient.PostAsync(ksqlServerUrl, content);
+
+
+                    // Check if the request was successful
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Read the content as a string
+                        result = await response.Content.ReadAsStringAsync();
+                        result = result.Replace("\n", "");
+                        JArray jsonArray = JArray.Parse(result);
+
+                        // Extract the value to be displayed in the TextBlock
+
+                        // Return the value
+                        return jsonArray;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Request failed with status code {response.StatusCode}. Response content:");
+                        Console.WriteLine(await response.Content.ReadAsStringAsync());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+            }
+            return JArray.Parse("{\"Error\":\"There has been an error\"}");
+
+
+        }
     }
 }

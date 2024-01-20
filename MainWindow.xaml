@@ -19,8 +19,7 @@
             <RowDefinition Height="0.7*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*"/>
-            <RowDefinition/>
+
         </Grid.RowDefinitions>
         <TextBlock Name="TextBlockVarazdinTemperature" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center" Loaded="TextBlockVarazdin_Loaded"/>
         <TextBlock Name="TextBlockZagrebTemperature" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center"/>
@@ -31,5 +30,10 @@
         <Label Content="Zagreb" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" />
         <Label Content="Split" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" />
         <Label Content="Rijeka" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="0" Grid.Column="4" VerticalAlignment="Center" />
+        <Label Content="Rain Percentage" HorizontalAlignment="Left" Margin="0,0,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+        <TextBlock Name="TextBlockVarazdinRain" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center" Loaded="TextBlockVarazdinTemperatureRain_Loaded"/>
+        <TextBlock Name="TextBlockZagrebRain" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center" />
+        <TextBlock Name="TextBlockSplitRain" Grid.Column="3" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center"/>
+        <TextBlock Name="TextBlockRijekaRain" Grid.Column="4" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="Loading" VerticalAlignment="Center" />
     </Grid>
 </Window>
